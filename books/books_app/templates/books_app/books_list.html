@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Books list</title>
+</head>
+<body>
+<h1>Here, you can search for the books. If you can't find the book you're looking for, you can <a href="{% url 'books_app:add_book' %}">add a book</a> or <a href="{% url 'books_app:import_books' %}">import new books.</a></h1>
+<form method="GET">
+    {{ myFilter.form }}
+    <button class="btn btn-primary" type="submit">Search</button>
+</form>
+
+<h1></h1>
+
+<table>
+    <tr>
+        <th>title</th><th>author</th><th>publication_date</th>
+        <th>isbn</th><th>pages</th><th>link</th><th>language</th>
+        <th>link to edit</th>
+    </tr>
+    {% for book in books %}
+    <tr>
+        <td>{{ book.title }}</td><td>{{ book.author }}</td><td>{{ book.publication_date }}</td>
+        <td>{{ book.isbn }}</td><td>{{ book.pages }}</td><td>{{ book.link }}</td><td>{{ book.language }}</td>
+        <td><a href="{% url 'books_app:edit_book' id=book.id %}">Edit here.</a></td>
+    </tr>
+
+    {% empty %}
+    <h3>Sorry, we don't have the book you're looking for.</h3>
+    {% endfor %}
+</table>
+</body>
+</html>

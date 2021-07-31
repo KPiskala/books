@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Books list</title>
+</head>
+<body>
+<h1>Here you can import new books. Just provide the keywords and click Save.</h1>
+<form action="." method="GET">
+    <input id="Search" type="text" name="q">
+    <input type="submit" value="Save" />
+</form>
+
+<h4><a href="{% url 'books_app:books_list' %}">Click here see the list of books.</a></h4>
+</body>
+</html>
