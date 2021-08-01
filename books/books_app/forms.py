@@ -5,40 +5,61 @@ from datetime import date
 class RawBookForm(forms.Form):
     title = forms.CharField(
         widget=forms.TextInput(
-            attrs={"placeholder": "Enter the book title."}
+            attrs={
+                "placeholder": "Enter the book title.",
+                "class": "form-control"
+            }
         )
     )
     author = forms.CharField(
         widget=forms.TextInput(
-            attrs={"placeholder": "Enter the book author."}
+            attrs={
+                "placeholder": "Enter the book author.",
+                "class": "form-control"
+            }
         )
     )
     publication_date = forms.DateField(
         widget=forms.DateInput(
-            attrs={"placeholder": "Enter the publication date."}
+            attrs={
+                "placeholder": "Enter the publication date.",
+                "class": "form-control"
+            }
         ),
         initial=date.min
     )
     isbn = forms.CharField(
         widget=forms.TextInput(
-            attrs={"placeholder": "Enter the ISBN number."}
+            attrs={
+                "placeholder": "Enter the ISBN number.",
+                "class": "form-control"
+            }
         )
     )
     pages = forms.IntegerField(
         widget=forms.NumberInput(
-            attrs={"placeholder": "Enter the number of pages."}
+            attrs={
+                "placeholder": "Enter the number of pages.",
+                "class": "form-control"
+            }
         ),
         required=False
     )
     link = forms.CharField(
         widget=forms.TextInput(
-            attrs={"placeholder": "Enter the link to the book cover."}
+            attrs={
+                "placeholder": "Enter the link to the book cover.",
+                "class": "form-control"
+            }
         ),
         required=False
     )
     language = forms.CharField(
         widget=forms.TextInput(
-            attrs={"placeholder": "Enter the language in which the book is written."}
+            attrs={
+                "placeholder": "Enter the language in which the book is written.",
+                "class": "form-control"
+            }
         ),
         required=False
     )

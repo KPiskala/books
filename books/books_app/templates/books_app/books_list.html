@@ -3,33 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <title>Books list</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-<h1>Here, you can search for the books. If you can't find the book you're looking for, you can <a href="{% url 'books_app:add_book' %}">add a book</a> or <a href="{% url 'books_app:import_books' %}">import new books.</a></h1>
-<form method="GET">
-    {{ myFilter.form }}
-    <button class="btn btn-primary" type="submit">Search</button>
-</form>
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+    <h1>Searching for the books</h1>
+</nav>
+<br/>
+<h4>Here, you can search for the books. If you can't find the book you're looking for,
+    feel free to <a href="{% url 'books_app:add_book' %}">add a book</a>
+    or <a href="{% url 'books_app:import_books' %}">import new books.</a>
+</h4>
+<br/>
+<div>
+    <div class="form-group d-grid gap-3 center" style="text-align: center">
+    <form method="GET">
+        {{ myFilter.form }}
+        <div>
+            <br/>
+        </div>
+        <div class="container-fluid col-md-2text-align: center">
+            <button class="btn btn-outline-success padding-bottom" type="submit" style="background-color:#e3f2fd; border-color:black; color:black;">Search</button>
+        </div>
+    </form>
+    </div>
+</div>
 
-<h1></h1>
+<br/>
 
-<table>
-    <tr>
-        <th>title</th><th>author</th><th>publication_date</th>
-        <th>isbn</th><th>pages</th><th>link</th><th>language</th>
-        <th>link to edit</th>
-    </tr>
-    {% for book in books %}
-    <tr>
-        <td>{{ book.title }}</td><td>{{ book.author }}</td><td>{{ book.publication_date }}</td>
-        <td>{{ book.isbn }}</td><td>{{ book.pages }}</td><td>{{ book.link }}</td><td>{{ book.language }}</td>
-        <td><a href="{% url 'books_app:edit_book' id=book.id %}">Edit here.</a></td>
-    </tr>
-
-    {% empty %}
-    <h3>Sorry, we don't have the book you're looking for.</h3>
-    {% endfor %}
+<table class="table table-striped table-hover table-responsive align-left">
+    <thead>
+        <tr>
+            <th style="min-width:200px">Title</th>
+            <th style="min-width:200px">Author</th>
+            <th style="min-width:200px">Publication date</th>
+            <th style="min-width:200px">ISBN</th>
+            <th style="min-width:200px">Number of pages</th>
+            <th style="min-width:200px">Preview link</th>
+            <th style="min-width:200px">Language</th>
+            <th style="min-width:200px">Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+        <tr>
+            <td style="min-width:200px">{{ book.title }}</td>
+            <td style="min-width:200px">{{ book.author }}</td>
+            <td style="min-width:200px">{{ book.publication_date }}</td>
+            <td style="min-width:200px">{{ book.isbn }}</td>
+            <td style="min-width:200px">{% if book.pages %} {{ book.pages}} {% endif %}</td>
+            <td style="min-width:200px">{% if book.link %}<a href="{{book.link}}">Preview link</a>{% endif %}</td>
+            <td style="min-width:200px">{{ book.language }}</td>
+            <td style="min-width:200px"><a href="{% url 'books_app:edit_book' id=book.id %}">Edit</a></td>
+        </tr>
+        {% empty %}
+        <h4>Sorry, we don't have the book you're looking for.
+            Do you want to <a href="{% url 'books_app:import_books' %}">import new books</a>?</h4>
+        {% endfor %}
+    </tbody>
 </table>
 </body>
 </html>
