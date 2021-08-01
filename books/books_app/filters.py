@@ -1,11 +1,10 @@
-import django_filters
-from django_filters import DateFilter, CharFilter
-from django.forms.widgets import TextInput, DateInput
+from django_filters import FilterSet, DateFromToRangeFilter, CharFilter, widgets
+from django.forms.widgets import TextInput
 
 from .models import *
 
 
-class BooksFilter(django_filters.FilterSet):
+class BooksFilter(FilterSet):
     title = CharFilter(
         field_name="title",
         lookup_expr="icontains",
@@ -20,20 +19,10 @@ class BooksFilter(django_filters.FilterSet):
         field_name="language",
         widget=TextInput(attrs={"style": "max-width:10em"})
     )
-    # start_date = DateFilter(
-    #     field_name="publication_date",
-    #     lookup_expr="gte",
-    #     widget=DateInput(attrs={"placeholder": "YYYY-MM-DD", "style": "max-width:10em", "class": "form-control form-control-sm"})
-    # )
-    # end_date = DateFilter(
-    #     field_name="publication_date",
-    #     lookup_expr="lte",
-    #     widget=DateInput(attrs={"placeholder": "YYYY-MM-DD", "style": "max-width:10em"})
-    # )
-    publication_date = django_filters.DateFromToRangeFilter(
+    publication_date = DateFromToRangeFilter(
         field_name="publication_date",
-        widget=django_filters.widgets.RangeWidget(
-            attrs={'placeholder': 'YYYY-MM-DD', "style": "max-width:7em"}
+        widget=widgets.RangeWidget(
+            attrs={"placeholder": "YYYY-MM-DD", "style": "max-width:7em"}
         )
     )
 
@@ -43,6 +32,5 @@ class BooksFilter(django_filters.FilterSet):
         exclude = ["isbn", "pages", "link", "publication_date"]
 
 
-class ImportFilter(django_filters.FilterSet):
+class ImportFilter(FilterSet):
     title = CharFilter(field_name="title", lookup_expr="icontains")
-

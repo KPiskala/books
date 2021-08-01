@@ -10,5 +10,3 @@ class Book(models.Model):
     pages = models.IntegerField(null=True)
     link = models.TextField(max_length=400, null=True)
     language = models.TextField(max_length=100, null=True)
-
-

@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.shortcuts import render, get_object_or_404, redirect
 import requests
-import json
 from datetime import date
 from .models import Book
 from .forms import RawBookForm
@@ -53,14 +52,6 @@ def edit_book(request, id):
     return render(request, "books_app/edit_book.html", context)
 
 
-def book_details(request):
-    book = Book.objects.get(id=1)
-    context = {
-        'book': book
-    }
-    return render(request, "books_app/details.html", context)
-
-
 def import_books(request):
     googleapikey = settings.API_KEY  # TODO remember to provide the key
     params = {
@@ -106,10 +97,10 @@ def import_books(request):
 
 def books_list(request):
     books = Book.objects.all()
-    myFilter = BooksFilter(request.GET, queryset=books)
-    books = myFilter.qs
+    books_filter = BooksFilter(request.GET, queryset=books)
+    books = books_filter.qs
     context = {
         "books": books,
-        "myFilter": myFilter
+        "books_filter": books_filter
     }
     return render(request, "books_app/books_list.html", context)
