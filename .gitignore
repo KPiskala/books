@@ -1,5 +1,5 @@
-books/.env
-venv/
-books/**/__pycache__/
-books/db.sqlite3
-.idea/ 
+.env
+venv
+**/__pycache__/
+db.sqlite3
+.idea/
