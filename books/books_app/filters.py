@@ -33,4 +33,4 @@ class BooksFilter(FilterSet):
 
 
 class ImportFilter(FilterSet):
-    title = CharFilter(field_name="title", lookup_expr="icontains")
+    query_strings = CharFilter(field_name="query_strings", lookup_expr="icontains")

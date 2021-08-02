@@ -12,8 +12,8 @@
 </nav>
 <br/>
 <h4>Here, you can search for the books. If you can't find the book you're looking for,
-    feel free to <a href="{% url 'books_app:add_book' %}">add a book</a>
-    or <a href="{% url 'books_app:import_books' %}">import new books.</a>
+    feel free to <a href="{% url 'books_app:add_book' %}" style="text-decoration:none">add a book</a>
+    or <a href="{% url 'books_app:import_books' %}" style="text-decoration:none">import new books.</a>
 </h4>
 <br/>
 <div>
@@ -56,9 +56,12 @@
         <td style="min-width:200px">{{ book.publication_date }}</td>
         <td style="min-width:200px">{{ book.isbn }}</td>
         <td style="min-width:200px">{% if book.pages %} {{ book.pages}} {% endif %}</td>
-        <td style="min-width:200px">{% if book.link %}<a href="{{book.link}}">Preview link</a>{% endif %}</td>
+        <td style="min-width:200px">{% if book.link %}<a href="{{book.link}}" style="text-decoration:none">Preview
+            link</a>{% endif %}
+        </td>
         <td style="min-width:200px">{{ book.language }}</td>
-        <td style="min-width:200px"><a href="{% url 'books_app:edit_book' id=book.id %}">Edit</a></td>
+        <td style="min-width:200px"><a href="{% url 'books_app:edit_book' isbn=book.isbn %}"
+                                       style="text-decoration:none">Edit</a></td>
     </tr>
     {% empty %}
     <h4>Sorry, we don't have the book you're looking for.
