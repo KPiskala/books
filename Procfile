@@ -1,1 +1,1 @@
-web: gunicorn books-managing-application .wsgi
+web: gunicorn books.wsgi
